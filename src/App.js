@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import User from "./User";
+import { useState } from "react";
 
 function App() {
+
+// State to track the selected radio button value
+const [selectedValue, setSelectedValue] = useState('');
+
+// Event handler to update the selected value when a radio button is clicked
+const handleRadioChange = (event) => {
+  setSelectedValue(event.target.value);
+};
+
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+ 
+      <input
+        type="radio"
+        id="option1"
+        name="options"
+        value="option1"
+       
+        onChange={handleRadioChange}
+      />
+      <label htmlFor="option1">Option 1</label>
+
+      <input
+        type="radio"
+        id="option2"
+        name="options"
+        value="option2"
+       
+        onChange={handleRadioChange}
+      />
+      <label htmlFor="option2">Option 2</label>
+
+      <input
+        type="radio"
+        id="option3"
+        name="options"
+        value="option3"
+        
+        onChange={handleRadioChange}
+      />
+      <label htmlFor="option3">Option 3</label>
+
+      <p>Selected value: {selectedValue}</p>
+      </>
+
   );
 }
 
