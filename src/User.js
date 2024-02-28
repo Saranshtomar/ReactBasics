@@ -3,7 +3,11 @@ function User(props) {
 
   return (
     <>
-     <button onClick={props.increase}>change in child </button>
+     <h1>
+      {props.name}<br/>
+      {props.tnc}<br/>
+      {props.gender}<br/>
+     </h1>
      
     </>
   );
