@@ -1,45 +1,56 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./App.css";
+import Table from 'react-bootstrap/Table';
 
-function StudentData(props) {
-  const [student, SetStudent] = useState([]);
+function StudentData() {
+  const [students, SetStudents] = useState([]);
 
   const fetchStudentData = async () => {
-    const response =  await axios.get("http://localhost:8081/students");
-    console.log(response);
-    SetStudent(response.data);
+    const response = await axios.get("http://localhost:8080/students");
+    SetStudents(response.data);
   };
   useEffect(() => {
     fetchStudentData();
-  }, [props.id]);
-
- 
+  }, []);
 
   return (
     <div>
-      <h2>Students List</h2>
-      <table>
+      <br /><br />
+      <h2>Student List</h2>
+      <Table>
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Age</th>
-            <th>756</th>
+            <th>DOB</th>
+            <th>City</th>
+            <th>Course</th>
           </tr>
         </thead>
         <tbody>
-          {student.map(students => (
-          <tr key={students.studentId}>
-            <td>{students.studentId}</td>
-            <td>{students.studentName}</td>
-            <td>{students.dateOfBirth}</td>
-            <td>{students.studentDepartment}</td>
-            <td>{students.studentCity}</td>
-          </tr>
-        ))}
+          {students.map(student => (
+            <tr key={student.id}>
+              <td>{student.id}</td>
+              <td>{student.name}</td>
+              <td>{student.dob}</td>
+              <td>{student.city}</td>
+              <td>
+                <Table>
+                  <tbody>
+                    {student.course.map(item => (
+                      <tr key={item.id}>
+                        <td>{item.name}</td>
+                        <td>{item.duration}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </td>
+            </tr>
+          ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 }
